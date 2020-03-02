@@ -1,0 +1,24 @@
+{
+  "name": "now-parcel-react-template",
+  "version": "1.0.0",
+  "main": "src",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "build": "parcel build src/index.html --out-dir public",
+    "dev": "parcel src/index.html --out-dir public"
+  },
+  "dependencies": {
+    "parcel": "^1.12.4",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "browserslist": [
+    "last 2 years"
+  ]
+}
