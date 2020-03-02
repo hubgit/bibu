@@ -1,17 +1,17 @@
 {
-  "name": "now-parcel-react-template",
-  "version": "1.0.0",
+  "name": "bibu",
+  "version": "0.1.0",
   "main": "src",
   "private": true,
   "license": "MIT",
   "scripts": {
-    "build": "parcel build src/index.html --out-dir public",
-    "dev": "parcel src/index.html --out-dir public"
+    "build": "parcel build src/index.html",
+    "dev": "parcel src/index.html"
   },
   "dependencies": {
     "parcel": "^1.12.4",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0"
   },
   "prettier": {
     "semi": false,
