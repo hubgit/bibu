@@ -40,7 +40,7 @@ const convert = ({ toFormat, fromFormat, input }) =>
       throw new Error(response.statusText)
     }
 
-    return response.json()
+    return response.text()
   })
 
 export const App = () => {
@@ -82,7 +82,7 @@ export const App = () => {
       setError(undefined)
 
       convert({ input, fromFormat, toFormat })
-        .then(({ output }) => {
+        .then(output => {
           setOutput(output)
         })
         .catch(error =>
