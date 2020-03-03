@@ -82,13 +82,17 @@ export const App = () => {
       const [file] = event.target.files
 
       if (file) {
-        setFilename(file.name)
+        if (file.size < 1024 * 1024) {
+          setFilename(file.name)
 
-        detectFormat(file).then(({ format }) => {
-          setFromFormat(Array.isArray(format) ? format[0] : format)
-        })
+          detectFormat(file).then(({ format }) => {
+            setFromFormat(Array.isArray(format) ? format[0] : format)
+          })
 
-        readFile(file).then(input => setInput(input))
+          readFile(file).then(input => setInput(input))
+        } else {
+          alert('Please choose a file smaller than 1MB')
+        }
       }
     }
   }, [])
