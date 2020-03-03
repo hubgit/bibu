@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
+import copyToClipboard from 'clipboard-copy'
 import './App.css'
 
 const fetchFormats = () =>
@@ -43,7 +44,18 @@ const convert = ({ toFormat, fromFormat, input }) =>
     return response.text()
   })
 
+const chooseExtension = (formats, format) => {
+  for (const [extension, types] of Object.entries(formats.extension)) {
+    if (types.includes(format)) {
+      return extension
+    }
+  }
+
+  return '.txt'
+}
+
 export const App = () => {
+  const [filename, setFilename] = useState(undefined)
   const [input, setInput] = useState(undefined)
   const [output, setOutput] = useState(undefined)
   const [formats, setFormats] = useState(undefined)
@@ -60,12 +72,18 @@ export const App = () => {
   const handleInputChange = useCallback(event => {
     event.preventDefault()
 
+    setInput(undefined)
+    setFilename(undefined)
     setOutput(undefined)
+    setFromFormat(undefined)
+    setError(undefined)
 
     if (event.target.files) {
       const [file] = event.target.files
 
       if (file) {
+        setFilename(file.name)
+
         detectFormat(file).then(({ format }) => {
           setFromFormat(Array.isArray(format) ? format[0] : format)
         })
@@ -90,6 +108,29 @@ export const App = () => {
         )
     },
     [toFormat, fromFormat, input]
+  )
+
+  const handleDownload = useCallback(
+    event => {
+      event.preventDefault()
+
+      const extension = chooseExtension(formats, toFormat)
+
+      const link = document.createElement('a')
+      link.download = (filename || 'Untitled.txt').replace(/\.\w+$/, extension)
+      link.href = URL.createObjectURL(new Blob([output]))
+      link.click()
+    },
+    [filename, output, toFormat, formats]
+  )
+
+  const handleCopy = useCallback(
+    event => {
+      event.preventDefault()
+
+      copyToClipboard(output)
+    },
+    [output]
   )
 
   return (
@@ -138,6 +179,12 @@ export const App = () => {
           </select>
           <button type="submit" disabled={!(fromFormat && toFormat)}>
             Convert
+          </button>
+          <button onClick={handleDownload} disabled={!output}>
+            Download
+          </button>
+          <button onClick={handleCopy} disabled={!output}>
+            Copy to clipboard
           </button>
         </div>
       )}
