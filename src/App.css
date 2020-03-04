@@ -1,9 +1,8 @@
 body {
   margin: 16px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font: 12px -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
   'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
   sans-serif;
-  font-size: 12px;
 }
 
 textarea {
@@ -14,6 +13,7 @@ textarea {
   box-sizing: border-box;
   height: 20em;
   margin: 8px 0;
+  font: 12px monospace;
 }
 
 select {
@@ -32,6 +32,7 @@ output {
   padding: 16px;
   max-height: 400px;
   overflow: auto;
+  font: 12px monospace;
 }
 
 
