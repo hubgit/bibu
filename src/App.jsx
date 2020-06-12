@@ -139,6 +139,8 @@ export const App = () => {
 
   return (
     <form onSubmit={handleSubmit}>
+      <p>bibu: convert between bibliography formats</p>
+      
       <div>
         <input type="file" onChange={handleInputChange} />
       </div>
